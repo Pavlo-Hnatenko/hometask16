@@ -15,11 +15,11 @@ public class Main {
         csvTable = getCsvTable();
         personalities = getPersonalitiesFromCsv();
 
-        printPersonalitiesProperties(personalities);
+        System.out.println(PersonalitiesPropertiesToString(personalities));
 
     }
 
-    private static CsvTable getCsvTable(){
+    private static CsvTable getCsvTable() {
 
         try {
             csvTable = CsvTable.fromFile(Paths.get("origin.csv")).get();
@@ -77,14 +77,19 @@ public class Main {
         return null;
     }
 
-    private static void printPersonalitiesProperties(List<Personality> personalities){
+    private static String PersonalitiesPropertiesToString(List<Personality> personalities) {
+
+        StringBuilder result = new StringBuilder();
 
         for (Personality personality : personalities) {
-            System.out.println("personality.getName() = " + personality.getName());
-            System.out.println("personality.getAge() = " + personality.getAge());
-            System.out.println("personality.getSex() = " + personality.getSex());
-            System.out.println("personality.getOccupation() = " + personality.getOccupation());
+
+            result.append("personality.getName() = ").append(personality.getName()).append(System.lineSeparator())
+                    .append("personality.getAge() = ").append(personality.getAge()).append(System.lineSeparator())
+                    .append("personality.getSex() = ").append(personality.getSex()).append(System.lineSeparator())
+                    .append("personality.getOccupation() = ").append(personality.getOccupation());
         }
+
+        return result.toString();
     }
 
     //    a potentially simple way to create personalities from CSV file (without reflection)
